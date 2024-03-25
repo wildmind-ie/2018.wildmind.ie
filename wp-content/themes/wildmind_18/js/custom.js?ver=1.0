@@ -1,0 +1,99 @@
+jQuery(function($){
+	
+	$('.santamas-gallery-slider').lightSlider({
+        item:6,
+        slideMove:1,
+		slideMargin: 0,
+		auto: true,
+        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+        speed:600,
+		pause: 4000,
+		enableDrag: false,
+		pager: false,
+        responsive : [
+			{
+                breakpoint:1900,
+                settings: {
+                    item:5
+                  }
+            },
+			{
+                breakpoint:1200,
+                settings: {
+                    item:4
+                  }
+            },
+            {
+                breakpoint:800,
+                settings: {
+                    item:3
+                  }
+            },
+            {
+                breakpoint:680,
+                settings: {
+                    item:2
+                  }
+            }
+        ]
+    });
+	
+	$('#santamas-gallery-slider').lightGallery(); 
+	
+	$('.toggle-menu').click(function(){
+		$(this).next().slideToggle();
+	});
+	
+	var templateDirectory = santamas_params.site_url;
+	
+	var bannerEffect = santamas_params.banner_effect;
+	
+	if( bannerEffect === 'snowflakes' ){
+		$('.banner-section, .header-banner').snowfall({
+			flakeCount : 30, 
+			maxSpeed : 2,
+			minSpeed : 1,
+			image : templateDirectory + "/images/flake.png",
+			minSize: 10, 
+			maxSize: 40,
+			flakeIndex: 99
+		});	
+	}else if( bannerEffect === 'snow' ){
+		$('.banner-section, .header-banner').snowfall({
+			flakeCount : 100, 
+			maxSpeed : 3,
+			minSpeed : 1,
+			round : true,
+			minSize: 3, 
+			maxSize: 8,
+			flakeColor : 'rgba(255,255,255,0.6)',
+			flakeIndex: 99
+		});
+	}
+	
+	var featuredEffect = santamas_params.featured_effect;
+	
+	if( featuredEffect === 'snow' ){
+		$('.santamas-featured-section').snowfall({
+			flakeCount : 100, 
+			maxSpeed : 3,
+			minSpeed : 1,
+			round : true,
+			minSize: 6, 
+			maxSize: 12,
+			flakeColor : 'rgba(255,255,255,0.6)',
+			flakeIndex: 99
+		});
+	}
+	
+
+	var finalDate = $(".event-counter").data('countdown');
+	$(".event-counter").countdown(finalDate, function(event) {
+	    $(this).html(event.strftime('<div><span>%D</span> days</div>'
+    + '<div><span>%H</span> hour</div>'
+    + '<div><span>%M</span> min</div>'
+    + '<div><span>%S</span> sec</div>')
+	    );
+	  });
+
+} );
